@@ -8,9 +8,11 @@ class WebAction extends Action {
 
 	function index(){
 		
+		if(!isset($_SESSION['username'])){
+			redict(U('web/login'));
+		}
 		$web_service = $this->service('web');
 		$info = $web_service->get_users();
-		var_dump($_SESSION);	
 
 		$this->assign('param', array('x'=>'x'));
 		$this->assign('info', $info);

@@ -16,6 +16,11 @@ function URL($param){
 	return U($param['app'], $param['param']);
 }
 
+function redict($url){
+	header('Location:'.$url);
+	exit;
+}
+
 
 function getIP() { 
  	if (getenv('HTTP_CLIENT_IP')) { 
