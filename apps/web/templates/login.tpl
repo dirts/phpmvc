@@ -2,12 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>登陆</title>
-<meta http-equiv="Content-Type" content="text/html; charset=uft-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="http://sync_sy.zhisland.com:8080/static/core/css/bootstrap.css" rel="stylesheet">
 <link href="http://sync_sy.zhisland.com:8080/static/core/js/icard/css/jquery.icard.css" rel="stylesheet">
+<link href="static/web/login.css" rel="stylesheet">
 </head>
 <body>
-<div style="padding:100px;">
+<div class="container">
 	<form action="index.php?mod=web&act=dologin" method="post" id="login">
 		<input type="text" name="username" placeholder="输入用户名">
 		<input type="password" name="password" placeholder="输入密码">

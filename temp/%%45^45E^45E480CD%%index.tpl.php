@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2013-06-19 16:40:59
+<?php /* Smarty version 2.6.26, created on 2013-06-19 17:11:03
          compiled from index.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'U', 'index.tpl', 16, false),)), $this); ?>
@@ -6,7 +6,7 @@ smarty_core_load_plugins(array('plugins' => array(array('function', 'U', 'index.
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>页面</title>
-<meta http-equiv="Content-Type" content="text/html; charset=uft-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="http://sync_sy.zhisland.com:8080/static/core/css/bootstrap.css" rel="stylesheet">
 <link href="http://sync_sy.zhisland.com:8080/static/core/js/icard/css/jquery.icard.css" rel="stylesheet">
 </head>

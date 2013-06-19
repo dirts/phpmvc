@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>页面</title>
-<meta http-equiv="Content-Type" content="text/html; charset=uft-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="http://sync_sy.zhisland.com:8080/static/core/css/bootstrap.css" rel="stylesheet">
 <link href="http://sync_sy.zhisland.com:8080/static/core/js/icard/css/jquery.icard.css" rel="stylesheet">
 </head>

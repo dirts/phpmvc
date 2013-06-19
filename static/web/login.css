@@ -1,0 +1,19 @@
+body {
+	margin:0px;
+	padding:0px;
+	height:100%;
+	background:url('http://img12.3lian.com/gaoqing02/01/31/01/06.jpg');
+	background-size:100%;
+}
+.container {
+	width:960px;
+	margin:0 auto;
+	margin-top:200px;
+}
+#login {
+	padding-left:200px;
+}
+#login input{
+	float:left;
+	margin-right:5px;
+}
