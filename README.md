@@ -2,9 +2,10 @@ a PHP-MVC : Dirt
 ======
 
 ## 模仿TP框架和minisystem框架，整体分为:
- * Action.class.php
- * Service.class.php
- * Model.class.php
+
+* Action.class.php
+* Service.class.php
+* Model.class.php
 
  其中action处理和返回页面，service层负责处理实际业务逻辑，model负责读写数据.
 
@@ -18,3 +19,11 @@ a PHP-MVC : Dirt
 	$this->service('mod');
 
 ## Service.class.php 拥有方法:
+
+	$mod = $this->model('mod');
+	$mod->method();
+
+## 登陆验证和页面跳转
+
+	* 增加了登陆验证
+	* 增加了页面跳转
