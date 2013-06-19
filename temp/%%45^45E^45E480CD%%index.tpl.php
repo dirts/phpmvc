@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2013-06-14 17:38:53
+<?php /* Smarty version 2.6.26, created on 2013-06-19 16:40:59
          compiled from index.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'U', 'index.tpl', 16, false),)), $this); ?>
@@ -11,7 +11,7 @@ smarty_core_load_plugins(array('plugins' => array(array('function', 'U', 'index.
 <link href="http://sync_sy.zhisland.com:8080/static/core/js/icard/css/jquery.icard.css" rel="stylesheet">
 </head>
 <body>
-<div class="header" style="padding:2px;position:fixed;z-index:9;backgroud:#fafafa;box-shadow:0 2px 2px #999;background:#fff;width:100%">
+<div class="header" style="padding:2px;position:fixed;z-index:9;backgroud:#fafafa;box-shadow:0 2px 2px #999;background:#fff;width:100%;top:0px;">
 	<?php echo $this->_tpl_vars['lang']['welcome']; ?>
  <b><?php echo $this->_tpl_vars['info'][0]['author_first']; ?>
  <?php echo $this->_tpl_vars['info'][0]['author_last']; ?>
@@ -29,6 +29,8 @@ smarty_core_load_plugins(array('plugins' => array(array('function', 'U', 'index.
 	<a href="<?php echo URL(array('app' => "web/api",'param' => $this->_tpl_vars['param']), $this);?>
 " class="btn btn-success" action-type="act-api" tabindex="1"><?php echo $this->_tpl_vars['lang']['api']; ?>
 </a>
+	<a href="<?php echo URL(array('app' => "web/logout"), $this);?>
+" class="btn btn-success" action-type="act-logout" tabindex="1" onclick="return false;">登出</a>
 </div>
 <div>
 <!--

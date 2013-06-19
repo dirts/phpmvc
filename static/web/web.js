@@ -29,6 +29,19 @@
 			}
 		});
 	});
+	
+	$('a[action-type="act-logout"]').on('click', function(e){
+		e.preventDefault();
+		var $url = $(this).attr('href');
+		$.comfirm('确认要退出登陆么').show().align().onok(function(){
+			$.post($url, function(json){
+				json  = $.parseJSON(json);
+				if(json.code == 0){
+					window.location.reload();
+				}
+			});
+		});
+	});
 
 	$('a[action-type]').each(function(){
 		$htm = $(this).html();

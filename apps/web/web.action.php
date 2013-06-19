@@ -18,6 +18,12 @@ class WebAction extends Action {
 		$this->assign('info', $info);
 		$this->assign('lang', $GLOBALS['lang']);
 		$this->assign('time', date("Y-m-d"));
+		
+		/*
+		echo '<pre>';
+		var_dump($GLOBALS);
+		echo '</pre>';
+		*/
 		$this->display('index.tpl');
 	}
 
@@ -62,5 +68,14 @@ class WebAction extends Action {
 		echo json_encode($data);
 	}
 
+	# 登出
+	function logout(){
+		session_destroy();
+		$data 	= array(
+			'code'		=> 0 , 
+			'message'	=> '成功', 
+		);
+		echo json_encode($data);
+	}
 }
 ?>
