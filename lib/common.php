@@ -1,6 +1,6 @@
 <?php
 	
-function U($app , $param){
+function U($app , $param=null){
 	$app = explode('/', $app);
 	$url = 'index.php?';
 	$url .= 'mod='. $app[0]. '&act='. $app[1];

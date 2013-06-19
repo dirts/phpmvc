@@ -6,9 +6,9 @@ class M{
 		$this->condition = $condition;
 	}
 
-	function select(){
+	function select($table){
 		if($this->conn){
-			$sql = 'select * from '.$this->table;
+			$sql = 'select * from '.$table;
 			if(isset($this->condition)) $sql .= ' where '.$this->condition;
 			$query = mysql_query($sql, $this->conn);
 			if($query){
@@ -57,9 +57,8 @@ class M{
 
 }
 
-function M($table){
+function M(){
 	$m = new M();
-	$m->table = $table;
 	return $m;
 }
 

@@ -2,8 +2,8 @@
 class webModel extends Model{
 
 	function get_users(){
-		//$info = $this->where('author_id = 2')->select();
-		$info = $this->select();
+		//$info = $this->where('author_id = 2')->select('author');
+		$info = $this->select('author');
 		/*
 		$insert = $this->insert(array(
 			'author_last'		=> 'shouyan',
@@ -19,6 +19,11 @@ class webModel extends Model{
 			'country'			=> 'USA',
 		));
 		*/
+		return $info;	
+	}
+	
+	function login($username, $password){
+		$info = $this->where('username = "'.$username. '" and password = ' . $password)->select('user');
 		return $info;	
 	}
 

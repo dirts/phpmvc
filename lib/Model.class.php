@@ -5,7 +5,7 @@ class Model {
 		include_once(ROOTDIR.'/lib/mysql.php');
 		$database = require_once(ROOTDIR.'/db.php');
 			
-		$this->m = M('author');
+		$this->m = M();
 		$this->m->connect($database);
 	}
 
@@ -14,8 +14,8 @@ class Model {
 		return $this;
 	}
 
-	function select(){
-		return $this->m->select();
+	function select($table){
+		return $this->m->select($table);
 	}
 
 	function insert($info){
