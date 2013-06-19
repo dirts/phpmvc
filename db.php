@@ -2,8 +2,8 @@
 
 return $database = array(
 	'host' 		=> '127.0.0.1',
-	'username'	=> 'zhisland',
-	'password'	=> 'zhisland',
+	'username'	=> 'username',
+	'password'	=> 'password',
 	'db' 		=> 'test_lishouyan',
 	'charset'	=> 'utf8',
 );
