@@ -26,5 +26,10 @@ class Model {
 		return $this->m->update($info);
 	}
 
+	function table($table){
+		$this->m->table($table);
+		return $this;
+	}
+
 }
 ?>

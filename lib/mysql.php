@@ -36,6 +36,10 @@ class M{
 		}
 	}
 
+	function table($table){
+		$this->table  = $table;
+	}
+
 	function update($info){
 		if($this->conn){
 			$sql = 'update '.$this->table.' set ';

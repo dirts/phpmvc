@@ -23,7 +23,9 @@ class WebAction extends Action {
 	}
 
 	function lists(){
-		$this->assign('name','LIST');
+		$web_service = $this->service('gallery');
+		$list = $web_service->get_list();
+		$this->assign('list', $list);
 		$this->display('list.tpl');
 	}
 

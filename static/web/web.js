@@ -57,18 +57,20 @@
 			var option = {
 				'success':function(json){
 					json = $.parseJSON(json);
-					$com.content('<img src="' + json.data.img + '" >').align();
+					$com.content('<img src="' + json.data.img + '" ><form action="index.php?mod=gallery&act=upload" method="post" enctype="multipart/form-data" style="display:none" id="updata_img"><input type="hidden" name="url" value="'+json.data.img+'"></form>').align();
 				}
 			}
 			$form.ajaxSubmit(option);
 		});
 
 		var $com = $.comfirm($form).show().align().onok(function(){
-			$.post($url, function(json){
-				json  = $.parseJSON(json);
-				if(json.code == 0){
+			var option = {
+				'success':function(json){
+					console.log(json);
 				}
-			});
+			}
+			var $form = this.find('#updata_img')//.ajaxSubmit(option);
+			$form.ajaxSubmit(option);
 		});
 	});
 
