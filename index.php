@@ -10,6 +10,5 @@
 	require(SMARTY_PATH.'Smarty.class.php');
 
 	$d = new D();
-	$d->init();
 
 ?>

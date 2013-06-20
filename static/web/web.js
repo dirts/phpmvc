@@ -47,4 +47,30 @@
 		$htm = $(this).html();
 		$(this).itips({'class':'i-simple-tips', 'content':$htm});
 	});
+
+
+	var $form = $('form');
+	$('a[action-type="act-upload"]').on('click', function(e){
+		e.preventDefault();
+		var $url = $(this).attr('href');
+		$form.find('input[type="file"]').on('change',function(){
+			var option = {
+				'success':function(json){
+					json = $.parseJSON(json);
+					$com.content('<img src="' + json.data.img + '" >').align();
+				}
+			}
+			$form.ajaxSubmit(option);
+		});
+
+		var $com = $.comfirm($form).show().align().onok(function(){
+			$.post($url, function(json){
+				json  = $.parseJSON(json);
+				if(json.code == 0){
+				}
+			});
+		});
+	});
+
+
 }(jQuery));

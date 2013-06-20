@@ -14,6 +14,7 @@
 	<a href="javascript:;" class="btn btn-success" action-type="act-message" tabindex="1">{$lang.msg}</a>
 	<a href="javascript:;" class="btn btn-danger" action-type="act-error" tabindex="1">{$lang.error}</a>
 	<a href="{U app="web/api" param=$param}" class="btn btn-success" action-type="act-api" tabindex="1">{$lang.api}</a>
+	<a href="javascript:;" class="btn btn-success" action-type="act-upload" tabindex="1">上传图片</a>
 	<a href="{U app="web/logout"}" class="btn btn-success" action-type="act-logout" tabindex="1" onclick="return false;">登出</a>
 </div>
 <div>
@@ -57,10 +58,11 @@
 </pre>
 </div>
 <form action="index.php?mod=gallery&act=index" method="post" enctype="multipart/form-data">
-	<input type="file" name="upload">
-	<input type="submit" value="提交">
+	<a href="javascript:;" class="btn">上传图片</a>
+	<input type="file" name="upload" style="border:1px solid #f00; opacity:0; position:absolute; left: 10px; width:80px; cursor:pointer">
 </form>
 <script src="http://sync_sy.zhisland.com:8080/static/core/js/jquery-1.8.0.min.js" type="text/javascript"></script>
+<script src="http://sync_sy.zhisland.com:8080/static/core/js/jquery.form.js" type="text/javascript"></script>
 <script src="http://sync_sy.zhisland.com:8080/static/core/js/icard/{$lang.lang}.lang.js" type="text/javascript"></script>
 <script src="http://sync_sy.zhisland.com:8080/static/core/js/icard/jquery.icard.js" type="text/javascript"></script>
 <script src="static/web/web.js" type="text/javascript"></script>

@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2013-06-19 17:58:53
+<?php /* Smarty version 2.6.26, created on 2013-06-20 13:03:27
          compiled from index.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'U', 'index.tpl', 16, false),)), $this); ?>
@@ -29,6 +29,7 @@ smarty_core_load_plugins(array('plugins' => array(array('function', 'U', 'index.
 	<a href="<?php echo URL(array('app' => "web/api",'param' => $this->_tpl_vars['param']), $this);?>
 " class="btn btn-success" action-type="act-api" tabindex="1"><?php echo $this->_tpl_vars['lang']['api']; ?>
 </a>
+	<a href="javascript:;" class="btn btn-success" action-type="act-upload" tabindex="1">上传图片</a>
 	<a href="<?php echo URL(array('app' => "web/logout"), $this);?>
 " class="btn btn-success" action-type="act-logout" tabindex="1" onclick="return false;">登出</a>
 </div>
@@ -80,10 +81,11 @@ smarty_core_load_plugins(array('plugins' => array(array('function', 'U', 'index.
 </pre>
 </div>
 <form action="index.php?mod=gallery&act=index" method="post" enctype="multipart/form-data">
-	<input type="file" name="upload">
-	<input type="submit" value="提交">
+	<a href="javascript:;" class="btn">上传图片</a>
+	<input type="file" name="upload" style="border:1px solid #f00; opacity:0; position:absolute; left: 10px; width:80px; cursor:pointer">
 </form>
 <script src="http://sync_sy.zhisland.com:8080/static/core/js/jquery-1.8.0.min.js" type="text/javascript"></script>
+<script src="http://sync_sy.zhisland.com:8080/static/core/js/jquery.form.js" type="text/javascript"></script>
 <script src="http://sync_sy.zhisland.com:8080/static/core/js/icard/<?php echo $this->_tpl_vars['lang']['lang']; ?>
 .lang.js" type="text/javascript"></script>
 <script src="http://sync_sy.zhisland.com:8080/static/core/js/icard/jquery.icard.js" type="text/javascript"></script>
