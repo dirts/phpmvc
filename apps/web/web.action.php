@@ -19,11 +19,6 @@ class WebAction extends Action {
 		$this->assign('lang', $GLOBALS['lang']);
 		$this->assign('time', date("Y-m-d"));
 		
-		/*
-		echo '<pre>';
-		var_dump($GLOBALS);
-		echo '</pre>';
-		*/
 		$this->display('index.tpl');
 	}
 

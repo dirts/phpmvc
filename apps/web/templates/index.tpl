@@ -56,6 +56,10 @@
 {/literal}
 </pre>
 </div>
+<form action="index.php?mod=gallery&act=index" method="post" enctype="multipart/form-data">
+	<input type="file" name="upload">
+	<input type="submit" value="提交">
+</form>
 <script src="http://sync_sy.zhisland.com:8080/static/core/js/jquery-1.8.0.min.js" type="text/javascript"></script>
 <script src="http://sync_sy.zhisland.com:8080/static/core/js/icard/{$lang.lang}.lang.js" type="text/javascript"></script>
 <script src="http://sync_sy.zhisland.com:8080/static/core/js/icard/jquery.icard.js" type="text/javascript"></script>

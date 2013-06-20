@@ -26,7 +26,10 @@ class D {
 		
 			$lang_file = $this->get_lang_file($mod,$lang);
 			
-			include_once($lang_file);
+			if(file_exists($lang_file)){
+				include_once($lang_file);
+			}
+
 			$modapp->init_smarty();
 			$modapp->smarty->template_dir = ROOTDIR.DS.APPS.$mod.TEMPLATES;
 			

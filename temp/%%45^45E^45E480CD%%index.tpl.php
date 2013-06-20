@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2013-06-19 17:11:03
+<?php /* Smarty version 2.6.26, created on 2013-06-19 17:58:53
          compiled from index.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'U', 'index.tpl', 16, false),)), $this); ?>
@@ -79,6 +79,10 @@ smarty_core_load_plugins(array('plugins' => array(array('function', 'U', 'index.
 
 </pre>
 </div>
+<form action="index.php?mod=gallery&act=index" method="post" enctype="multipart/form-data">
+	<input type="file" name="upload">
+	<input type="submit" value="提交">
+</form>
 <script src="http://sync_sy.zhisland.com:8080/static/core/js/jquery-1.8.0.min.js" type="text/javascript"></script>
 <script src="http://sync_sy.zhisland.com:8080/static/core/js/icard/<?php echo $this->_tpl_vars['lang']['lang']; ?>
 .lang.js" type="text/javascript"></script>

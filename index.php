@@ -9,7 +9,6 @@
 	include_once('config.php');
 	require(SMARTY_PATH.'Smarty.class.php');
 
-	//$_SESSION['admin'] = true;
 	$d = new D();
 	$d->init();
 
