@@ -53,6 +53,22 @@ class M{
 		}
 	}
 
+	function get_table(){
+		if($this->conn){
+			$sql = 'show tables';
+			$query = mysql_query($sql, $this->conn);
+			if($query){
+				$results = array();
+				while($res = mysql_fetch_row($query)){
+					array_push($results, $res);
+				}
+				return array_values($results);
+			}else{
+				return $query;
+			}
+		}
+	}
+
 	function connect($db){
 		$this->conn = mysql_connect($db['host'], $db['username'], $db['password']);	
 		mysql_select_db('test_lishouyan', $this->conn);

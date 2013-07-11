@@ -60,7 +60,6 @@ class D {
 		}
 	}
 
-
 	#获取语言包
 	function get_lang_file($mod, $lang){
 		$file = ROOTDIR.DS.APPS.$mod.DS.'lang/'.$lang.DOT_PHP;

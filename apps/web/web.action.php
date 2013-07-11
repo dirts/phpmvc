@@ -1,7 +1,12 @@
 <?php
 class WebAction extends Action {
 	
+	function bootstrap(){
+		$this->display('bootstrap.tpl');
+	}
+	
 	function login(){
+		//var_dump($GLOBALS);
 		$this->assign('lang', $GLOBALS['lang']);
 		$this->display('login.tpl');
 	}
@@ -13,7 +18,9 @@ class WebAction extends Action {
 		}
 		$web_service = $this->service('web');
 		$info = $web_service->get_users();
+		$tables = $web_service->get_table();
 
+		$this->assign('tables', $tables);
 		$this->assign('param', array('x'=>'x'));
 		$this->assign('info', $info);
 		$this->assign('lang', $GLOBALS['lang']);
@@ -38,6 +45,11 @@ class WebAction extends Action {
 			'data' 		=> $ip,
 		);
 		echo json_encode($data);
+	}
+	
+	#pdf.
+	function pdf(){
+			
 	}
 	
 	function dologin(){
@@ -73,6 +85,26 @@ class WebAction extends Action {
 			'message'	=> '成功', 
 		);
 		echo json_encode($data);
+	}
+
+	function seajs(){
+		$this->display('seajs.tpl');
+	}
+
+
+	#page
+	function page(){
+		$web_service = $this->service('web');
+		$tables = $web_service->get_table();
+
+		$fetch = $this->fetch('page.tpl');
+		
+		var_dump(ROOTDIR.DS.'apps/web'.DS.'page2.tpl');
+		#ob_get_contents
+		file_put_contents(ROOTDIR.DS.'data'.DS.'page2.tpl', $fetch);
+			
+		$this->assign('tables', $tables);
+		$this->display('page.tpl');
 	}
 }
 ?>

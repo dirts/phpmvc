@@ -1,4 +1,28 @@
 ;(function($){
+
+
+	Function.prototype.slice = function(index){
+		var args = [], len = arguments.length,
+			Slice = Array.prototype.slice;
+		
+		if(len == 0){
+			return Slice.call(this.arguments);
+		}else if(len == 1){
+			return Slice.call(this.arguments, index);
+		}else if(len > 1){
+			args = Slice.call(arguments, 0, 2);
+			return Slice.call(this.arguments, args[0], args[1]);
+		}
+	}
+	
+	function demo(){
+		var arr =  arguments.callee.slice();
+		console.log(arr);
+	}
+
+	demo(0,1,2,3,4,5);
+
+
 	var $comfirm = $.comfirm('点击确认执行一个操作，点击取消什么都不做').close().onok(function(){ 
 		$.message('执行了一个操作'); 
 	});

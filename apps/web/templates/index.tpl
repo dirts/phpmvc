@@ -18,14 +18,6 @@
 	<a href="{U app="web/logout"}" class="btn btn-success" action-type="act-logout" tabindex="1" onclick="return false;">登出</a>
 </div>
 <div>
-<!--
-{foreach from=$info item=items}
-	{foreach from=$items item=item key=key}
-		{$key} : <b>{$item}</b>&nbsp;&nbsp;
-	{/foreach}
-	</br>
-{/foreach}
--->
 <pre>
 {literal}
 
@@ -56,6 +48,17 @@
 	});
 {/literal}
 </pre>
+</div>
+<div>
+{foreach from=$tables item=table key=key}
+	<strong style="font-weight:bold">	
+		{$key} : 
+		{foreach from=$table item="item"}
+			{$item}
+		{/foreach}
+	</strong>
+	</br>
+{/foreach}
 </div>
 <form action="index.php?mod=gallery&act=index" method="post" enctype="multipart/form-data">
 	<a href="javascript:;" class="btn">上传图片</a>

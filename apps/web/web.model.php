@@ -21,6 +21,7 @@ class webModel extends Model{
 		*/
 		return $info;	
 	}
+
 	
 	function login($username, $password){
 		$info = $this->where('username = "'.$username. '" and password = ' . $password)->select('user');

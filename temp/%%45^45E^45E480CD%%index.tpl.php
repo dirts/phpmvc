@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2013-06-20 13:03:27
+<?php /* Smarty version 2.6.26, created on 2013-06-21 15:22:32
          compiled from index.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'U', 'index.tpl', 16, false),)), $this); ?>
@@ -34,20 +34,6 @@ smarty_core_load_plugins(array('plugins' => array(array('function', 'U', 'index.
 " class="btn btn-success" action-type="act-logout" tabindex="1" onclick="return false;">登出</a>
 </div>
 <div>
-<!--
-<?php $_from = $this->_tpl_vars['info']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
-    foreach ($_from as $this->_tpl_vars['items']):
-?>
-	<?php $_from = $this->_tpl_vars['items']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
-    foreach ($_from as $this->_tpl_vars['key'] => $this->_tpl_vars['item']):
-?>
-		<?php echo $this->_tpl_vars['key']; ?>
- : <b><?php echo $this->_tpl_vars['item']; ?>
-</b>&nbsp;&nbsp;
-	<?php endforeach; endif; unset($_from); ?>
-	</br>
-<?php endforeach; endif; unset($_from); ?>
--->
 <pre>
 <?php echo '
 
@@ -79,6 +65,23 @@ smarty_core_load_plugins(array('plugins' => array(array('function', 'U', 'index.
 '; ?>
 
 </pre>
+</div>
+<div>
+<?php $_from = $this->_tpl_vars['tables']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
+    foreach ($_from as $this->_tpl_vars['key'] => $this->_tpl_vars['table']):
+?>
+	<strong style="font-weight:bold">	
+		<?php echo $this->_tpl_vars['key']; ?>
+ : 
+		<?php $_from = $this->_tpl_vars['table']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
+    foreach ($_from as $this->_tpl_vars['item']):
+?>
+			<?php echo $this->_tpl_vars['item']; ?>
+
+		<?php endforeach; endif; unset($_from); ?>
+	</strong>
+	</br>
+<?php endforeach; endif; unset($_from); ?>
 </div>
 <form action="index.php?mod=gallery&act=index" method="post" enctype="multipart/form-data">
 	<a href="javascript:;" class="btn">上传图片</a>

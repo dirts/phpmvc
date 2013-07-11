@@ -9,6 +9,10 @@ class Action {
 		$this->smarty->cache_dir = ROOTDIR.CACHE;
 		$this->smarty->register_function('U', 'URL');
 	}
+	
+	function fetch($file){
+		return $this->smarty->fetch($file);	
+	}
 
 	function assign($name, $varable){
 		$this->smarty->assign($name, $varable);	

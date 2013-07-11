@@ -18,6 +18,8 @@ class galleryService extends Service{
 	}
 	
 	function move($file, $dir){
+		#basename 函数获取文件名
+		#pathinfo 可以获取路径:dirname，文件名:basename，扩展名:extension
 		$name = basename($file);
 		$newname = strtolower(time().'_'.$name);
 		$res = copy(ROOTDIR.$file, ROOTDIR.$dir.$newname);
