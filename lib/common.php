@@ -44,4 +44,9 @@ function getIP() {
  	return $ip; 
 }
 
+function preg_test($reg, $str){
+
+	return preg_match($reg, $str);
+}
+
 ?>

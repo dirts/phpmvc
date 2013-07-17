@@ -2,11 +2,11 @@
 class WebAction extends Action {
 	
 	function bootstrap(){
+		$res = preg_match('/ts/', 'tsssts');
 		$this->display('bootstrap.tpl');
 	}
 	
 	function login(){
-		//var_dump($GLOBALS);
 		$this->assign('lang', $GLOBALS['lang']);
 		$this->display('login.tpl');
 	}
@@ -99,7 +99,6 @@ class WebAction extends Action {
 
 		$fetch = $this->fetch('page.tpl');
 		
-		var_dump(ROOTDIR.DS.'apps/web'.DS.'page2.tpl');
 		#ob_get_contents
 		file_put_contents(ROOTDIR.DS.'data'.DS.'page2.tpl', $fetch);
 			

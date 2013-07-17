@@ -1,24 +1,42 @@
 <?php
 class D {
 
+	/*
+		1.index.php 准备基础文件加载器
+		2.加载库文件
+
+	*/
 	#初始化实例自动执行的方法
 	function __construct(){
-		$req = $_REQUEST;
+		$request = $_REQUEST;
 		$this->app = array();
-		
-		if(isset($_REQUEST[MOD])){
-			$this->app[MOD] = $req[MOD];
-		}else{
+	
+		if( empty( $request[MOD] ) && empty( $request[ACT] ) ){
 			$this->app[MOD] = 'web';
+			$this->app[ACT]	= 'index';
+			redict(U(join('/', $this->app)));
+		}
+
+		if( empty($request[MOD]) ){
+			$this->app[MOD] = 'web';
+		}else{
+			$this->app[MOD] = $request[MOD];
+		}
+	
+		if( empty($request[ACT]) ){
+			$this->app[ACT] = 'index';
+		}else{
+			$this->app[ACT]	= $request[ACT];
 		}
 		
 		$mod_path = $this->get_mod_path($this->app);
+
 		if(!file_exists($mod_path)){
 			$this->app[MOD] = 'web';
 			$mod_path = $this->get_mod_path($this->app);
 		}
 		
-		if(isset($_REQUEST[ACT])) $this->app[ACT] = $req[ACT];
+		if(isset($_REQUEST[ACT])) $this->app[ACT] = $request[ACT];
 		else $this->app[ACT] = 'login';
 		
 		$this->load_app($mod_path, $this->app[MOD], $this->app[ACT]);
@@ -26,10 +44,11 @@ class D {
 
 	#实例消失自动执行的方法
 	function __destruct(){
+	
 	}
 
 	#初始化mod
-	function load_app($file, $mod,$act){
+	function load_app($file, $mod, $act){
 		include_once($file);
 		$mod_class = $mod.'Action';
 		$modapp = new $mod_class();

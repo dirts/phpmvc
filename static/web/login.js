@@ -16,5 +16,3 @@
 	});
 }(jQuery));
 
-var ss = 's';
-alert(ss);

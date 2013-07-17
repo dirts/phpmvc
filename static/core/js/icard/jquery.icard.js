@@ -463,29 +463,37 @@ function getParamValue(_2b) {
 }(jQuery));
 
 
-(function(){
+;(function($){
 
 	$.fn.placeholder = function (param) {
-		var defaults = {},
-		opts = $.extend({}, defaults, param);
+		if('placeholder' in document.createElement('input') || this.length == 0) return this;
+		
+		var defaults = {}, opts = $.extend({}, defaults, param);
+		
 		return this.each(function() {
 			var $this = $(this),
-			text = $this.attr('action-data');
-			$this.val(text);
-			$this.bind('focus blur click', function(e) {
-				switch (e.type) {
-					case 'focus':
-						if ($.trim($this.val()) == text)
-						$this.val('');
-						break;
-					case 'blur':
-						if ($.trim($this.val()) == '')
-						$this.val(text);
-						break;
-					default:
-				}
-			});
+				placeholder = $this.attr('placeholder');
+		
+			if($this.val() == '') $this.val(placeholder);
+		
+			$this
+				.off('focus.holder blur.holder click.holder')
+				.on('focus.holder blur.holder click.holder', function(e) {
+					switch (e.type) {
+						case 'focus':
+							if ($.trim($this.val()) == placeholder)
+							$this.val('');
+							break;
+						case 'blur':
+							if ($.trim($this.val()) == '')
+							$this.val(placeholder);
+							break;
+						default:
+					}
+				});
 		});
 	}
 
-}());
+	$('input[placeholder]').placeholder();
+
+}(jQuery));
