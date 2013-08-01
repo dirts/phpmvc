@@ -1,6 +1,5 @@
 <?php
 class D {
-
 	/*
 		1.index.php 准备基础文件加载器
 		2.加载库文件

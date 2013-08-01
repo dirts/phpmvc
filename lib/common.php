@@ -49,4 +49,19 @@ function preg_test($reg, $str){
 	return preg_match($reg, $str);
 }
 
+
+function console_log($msg){
+	echo '<pre>';
+	var_dump($msg);
+	echo '</pre>';
+}
+
+
+function get_post($key, $value){
+	$return =  $_POST[$key];
+	return $return;
+}
+
+
+
 ?>

@@ -18,9 +18,9 @@
 	<a href="{U app="web/logout"}" class="btn btn-success" action-type="act-logout" tabindex="1" onclick="return false;">登出</a>
 </div>
 <div class="container">
-{foreach from=$list item=item}
+	{foreach from=$list item=item}
 		<img src="{$item.url}" width="100"/>&nbsp;
-{/foreach}
+	{/foreach}
 </div>
 <script src="http://sync_sy.zhisland.com:8080/static/core/js/jquery-1.8.0.min.js" type="text/javascript"></script>
 <script src="http://sync_sy.zhisland.com:8080/static/core/js/jquery.form.js" type="text/javascript"></script>

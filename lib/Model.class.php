@@ -1,12 +1,13 @@
 <?php
 class Model {
+	
 	# 初始化一个数据库
 	function __construct(){
-		include_once(ROOTDIR.'/lib/mysql.php');
-		$database = require_once(ROOTDIR.'/db.php');
-			
 		$this->m = M();
-		$this->m->connect($database);
+	}
+
+	function query($sql){
+		return $this->m->query($sql);
 	}
 
 	function where($condition){
@@ -20,6 +21,10 @@ class Model {
 
 	function insert($info){
 		return $this->m->insert($info);
+	}
+	
+	function del(){
+		return $this->m->del();
 	}
 	
 	function update($info){
@@ -36,4 +41,5 @@ class Model {
 	}
 
 }
+
 ?>

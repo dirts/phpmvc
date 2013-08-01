@@ -96,7 +96,9 @@ function getParamValue(_2b) {
 				'opacity': 0.5,
 				'z-index': 99999,
 				'background': '#000',
-				'position': 'fixed'
+				'position': 'fixed',
+				'top':0,
+				'left':0
 			});
 		}
 
@@ -274,7 +276,7 @@ function getParamValue(_2b) {
 			$trigger.trigger('ok');
 		});
 
-		//$.idrag($this.find('.i-dialog-title'), $this);
+		$.idrag($this.find('.i-dialog-title'), $this);
 		$body.prepend($mask).prepend($this);
 
 		return $this;
@@ -329,8 +331,6 @@ function getParamValue(_2b) {
 		var opts = $.extend(defaults, settings);
 
 		if (opts.delay < mintime) opts.delay = mintime;
-
-
 
 		this.each(function() {
 
@@ -392,8 +392,6 @@ function getParamValue(_2b) {
 			switch (e.type) {
 				case 'mousedown':
 					isDrag = true;
-					//start.x = e.offsetX;
-					//start.y = e.offsetY;
 					start.x = e.originalEvent.layerX;
 					start.y = e.originalEvent.layerY;
 				break;
@@ -411,7 +409,11 @@ function getParamValue(_2b) {
 				default:
 			}
 		}
-		$target.on('mousedown mousemove mouseup', function(e) {
+		$target.on('mousedown  mouseup', function(e) {
+			drag(e);
+		});
+
+		$(document).bind('mousemove', function(){
 			drag(e);
 		});
 	}

@@ -46,6 +46,7 @@
 		$text = $(this).text();
 		$(this).itips({'class' : 'i-simple-tips', 'content' : $text });
 	});
+
 {/literal}
 </pre>
 </div>

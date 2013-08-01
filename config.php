@@ -1,5 +1,6 @@
 <?
 
+define('WWWROOT',  				__DIR__);
 define('ROOTDIR',  				__DIR__);
 define('CFG_LANG', 				'chinese');
 define('APPS', 					'apps/');

@@ -3,7 +3,7 @@
 class Service{
 	#初始化实例自动执行的方法
 	function __construct(){
-		$this->model = new Model();
+		//$this->model = new Model();
 	}
 
 	function model($app){

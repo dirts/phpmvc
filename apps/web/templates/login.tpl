@@ -10,7 +10,7 @@
 <body>
 <div class="container">
 	<form action="index.php?mod=web&act=dologin" method="post" id="login">
-		<input type="text" name="username" placeholder="输入用户名" value="s">
+		<input type="text" name="username" placeholder="输入用户名">
 		<input type="password" name="password" placeholder="输入密码">
 		<a href="javascript:;" class="btn btn-success" action-type="act-login">登陆</a>
 	</form>

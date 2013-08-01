@@ -1,10 +1,10 @@
 <?php
 
-return $database = array(
-	'host' 		=> '127.0.0.1',
+return array(
+	'host' 		=> '192.168.2.70',
 	'username'	=> 'zhisland',
 	'password'	=> 'zhisland',
-	'db' 		=> 'test_lishouyan',
+	'database' 	=> 'zhisland',
 	'charset'	=> 'utf8',
 );
 

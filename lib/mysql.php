@@ -2,8 +2,34 @@
 
 class M{
 
+	var $conn ;
+
+	function __construct(){
+		$this->connect( require_once(ROOTDIR.'/db.php'));
+	}
+	
 	function where($condition){
 		$this->condition = $condition;
+	}
+
+	function query($sql){
+		if($this->conn){
+			$query = mysql_query($sql, $this->conn);
+			
+			if($query){
+				$results = array();
+				while($res = mysql_fetch_assoc($query)){
+					$results[] 	= $res;
+				}
+				$count = count($results);
+				if($count == 0) return null;
+				elseif($count == 1) return $results[0];
+				else return $results;
+			}
+
+		}else{
+			return false;
+		}
 	}
 
 	function select($table){
@@ -12,11 +38,17 @@ class M{
 			if(isset($this->condition)) $sql .= ' where '.$this->condition;
 			$query = mysql_query($sql, $this->conn);
 			if($query){
+				
 				$results = array();
+				
 				while($res = mysql_fetch_assoc($query)){
-					array_push($results, $res)	;
+					$results[] 	= $res;
 				}
-				return $results;
+				$count = count($results);
+				if($count == 0) return null;
+				elseif($count == 1) return $results[0];
+				else return $results;
+			
 			}else{
 				return $query;
 			}
@@ -28,16 +60,12 @@ class M{
 		$vals = array_values($info);
 		$key = ' ( '.join(' , ', $keys).' ) ';
 		$val = ' ( \''.join('\' , \'', $vals).'\' )';
-		
+	
 		if($this->conn){
 			$sql = 'insert into '.$this->table.$key.'values'.$val;
 			$query = mysql_query($sql, $this->conn);
 			return $query;
 		}
-	}
-
-	function table($table){
-		$this->table  = $table;
 	}
 
 	function update($info){
@@ -48,6 +76,18 @@ class M{
 			}
 			$sql .= join(' , ', $info);
 			if(isset($this->condition)) $sql .= ' where '.$this->condition;
+			$query = mysql_query($sql, $this->conn);
+			return $query;
+		}
+	}
+	
+	function table($table){
+		$this->table  = $table;
+	}
+
+	function del(){
+		if($this->conn){
+			$sql = 'delete from '.$this->table.' where '.$this->condition;
 			$query = mysql_query($sql, $this->conn);
 			return $query;
 		}
@@ -70,8 +110,13 @@ class M{
 	}
 
 	function connect($db){
-		$this->conn = mysql_connect($db['host'], $db['username'], $db['password']);	
-		mysql_select_db('test_lishouyan', $this->conn);
+		static $conn;
+		if(!is_resource($conn)) 	{
+			$conn = mysql_connect($db['host'], $db['username'], $db['password']);	
+			mysql_select_db($db['database'], $conn);
+			mysql_query('set names utf8', $conn);
+		}
+		$this->conn =$conn;
 		return $this->conn;
 	}
 

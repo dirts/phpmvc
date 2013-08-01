@@ -7,7 +7,8 @@ class Action {
 		$this->smarty->compile_dir = ROOTDIR.TEMP;
 		$this->smarty->config_dir = ROOTDIR.CONFIGS;
 		$this->smarty->cache_dir = ROOTDIR.CACHE;
-		$this->smarty->register_function('U', 'URL');
+		$this->smarty->left_delimiter = '{%';
+		$this->smarty->right_delimiter = '%}';
 	}
 	
 	function fetch($file){
