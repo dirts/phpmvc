@@ -1,0 +1,24 @@
+ul.user-list li a{
+	float:right;
+	margin:0 5px;
+	display:none;
+}
+
+ul.user-list li:hover a{
+	display:inline-block;
+}
+
+ul.user-list li{
+	list-style:none;
+	padding:5px 2px;
+}
+
+ul.user-list li:nth-child(odd){
+	background:#fafafa;
+}
+
+ul.user-list li:hover{
+	background:#ffcc00;
+}
+
+
