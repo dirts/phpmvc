@@ -118,4 +118,12 @@ function http($url){
 	return $respons;
 }
 
+function array_get_fields(&$datas, $field){
+	$array = array();
+	foreach($datas as $key => $item)
+		$array[] = $item[$field];
+	
+	return $array;
+}
+
 ?>

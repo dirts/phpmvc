@@ -50,7 +50,6 @@ class webService extends Service{
 				$p = mb_substr($p, 0, 1);
 				$web_model->set_pin($id, $p);
 			}else{
-				var_dump($f);
 			}
 		}
 	}

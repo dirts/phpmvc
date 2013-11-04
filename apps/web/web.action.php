@@ -40,7 +40,6 @@ class WebAction extends Action {
 		$service->city_fixed($citys);
 		
 	}
-
 	
 	function fs(){
 		return;
@@ -274,14 +273,41 @@ class WebAction extends Action {
 
 	#切库
 	function change_db(){
-		$page = http('http://lishouyan.static.deving.zhisland.com/index.php?mod=web&act=api');
-		$page = json_decode($page, true);
-		$page = array_merge($page, array('code'=>'1', 's'=>'1'));
-		console::log($page);
+		//$page = http('http://lishouyan.static.deving.zhisland.com/index.php?mod=web&act=api');
+		//$page = json_decode($page, true);
+		//$page = array_merge($page, array('code'=>'1', 's'=>'1'));
+		//console::log($page);
+		
 		$mod = $this->model('web');
-
-		$db = $mod->m->switch_db(config('mysql_server.zhisland'));
-		$res = $db->get_table();
+		
+		$db = $mod->m->db(config('mysql_server.zhtfeed'));
+		//$db = $mod->m->db(config('mysql_server.zhisland'));
+		//$db->table('user')->insert({'username'=>'admin', 'password'=>'stupid'});
+		
+		$res = $db->table('user')->select();
+		//show_tables();
+		//$data  = array_get_fields($res, 0);
+		var_dump($res);
 	}
+
+	function db(){
+		$mod = $this->model('web');
+	}
+		
+	#mc test
+	public function mc(){
+		$mc = new Memcache;
+		$mc->connect('10.8.14.105', 12000);
+		$mc->set('test', 'value_001', 0, 3600);
+		$mc_res = $mc->get('test');
+		$mc->close();
+	}
+	
+	public function pq(){
+		phpQuery::newDocumentFile('http://www.baidu.com/');  
+		$com = pq('#u a')->attr('href');
+		var_dump($com);
+	}
+
 }
 ?>

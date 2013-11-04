@@ -27,16 +27,16 @@ class Model {
 		return $this->m->insert($info);
 	}
 	
-	function del(){
-		return $this->m->del();
+	function delete(){
+		return $this->m->delete();
 	}
 	
 	function update($info){
 		return $this->m->update($info);
 	}
 	
-	function get_table(){
-		return $this->m->get_table();
+	function show_table(){
+		return $this->m->show_table();
 	}
 
 	function table($table){

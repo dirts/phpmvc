@@ -1,4 +1,4 @@
-<?
+<?php
 
 define('WWWROOT',  				__DIR__);
 define('ROOTDIR',  				__DIR__);
@@ -36,9 +36,7 @@ config(array(
 			'host'		=> '192.168.2.70',
 			'username'	=> 'zhisland',
 			'password'	=> 'zhisland',
-			'database'	=> 'zhtfeed',
+			'database'	=> 'test_lishouyan',
 		),
 	)
 ));
-
-$sql = config('mysql_server.zhisland');
