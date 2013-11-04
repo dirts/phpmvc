@@ -118,12 +118,24 @@ function http($url){
 	return $respons;
 }
 
+#获取字段
 function array_get_fields(&$datas, $field){
 	$array = array();
 	foreach($datas as $key => $item)
 		$array[] = $item[$field];
 	
 	return $array;
+}
+
+#格式化json
+function parse_json($data){
+	if(defined(JSON_UNESCAPED_UNICODE)){
+		return json_encode($data, JSON_UNESCAPED_UNICODE);	
+	}else{
+		$json = json_encode($data);
+		$json = preg_replace("#\\\u([0-9a-f]{4})#ie", "iconv('UCS-2', 'UTF-8', pack('H4', '\\1'))", $json);
+		return $json;
+	}
 }
 
 ?>
