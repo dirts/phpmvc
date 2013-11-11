@@ -14,7 +14,6 @@ class WebAction extends Action {
 				$tmp[] = $arr;
 			}
 		}
-		
 
 		$service = $this->service('web');
 		foreach($tmp as $a){
@@ -31,47 +30,38 @@ class WebAction extends Action {
 		$service = $this->service('web');
 		$citys = $service->get_citys();
 		$service->city_pinyins($citys);
-		
 	}
 	
 	function city_fixed(){
 		$service = $this->service('web');
 		$citys = $service->get_citys();
 		$service->city_fixed($citys);
-		
 	}
 	
 	function fs(){
-		return;
 		#选择环境
-		$dev 	= '/home/yujin/dev-yujins';
+		$dev 	= '/home/lishouyan/fs';
 		#模块名字
 		$mod 	= 'Bus';
 		#表名字
-		$table 	= 'user_bus'; 
+		$table 	= 'user'; 
 		
 		$mods 	= strtolower($mod);
 		
-		#=========
-		//$file = WWWROOT.DS.APPS.'web'.DS.'wt.s';
-		
-		//$file_array = open($file);
-
-		//$file_name = get_file_name($file);
-		//$file_path = get_file_path($file);
 
 
 		$web_service = $this->service('web');
 		$fields = $web_service->get_fields_info('ts_'.$table);
 
 
+		//*处理字段
 		foreach($fields as $key => $field){
 			if(is_primarykey($field)){
 				$index_field = $field['Field'];
 			}
 
 			$t = field_type($field);
-			
+		
 			if($t[0] == 'text'){
 				$fields[$key]['html'] = '<textarea name="'.$field['Field'].'">{$data[\''.$field['Field'].'\']}</textarea>';
 			}elseif($t[1] == 'tinyint'){
@@ -83,6 +73,8 @@ class WebAction extends Action {
 			};
 		}
 
+
+		//文件配置
 		$files = array(
 			'index.html' 		=> array(
 					'path'		=> $dev.'/apps/admin/Tpl/default/'.$mod.'/index.html',
@@ -104,20 +96,22 @@ class WebAction extends Action {
 					'path'		=> $dev.'/apps/'.$mods.'/Lib/Model/'.$mod.'Model.class.php',
 					'template'	=> 'model.tpl',
 				),
+			'core.js'	=> array(
+					'path'		=> $dev.'/static/admin/'.$mods.'/js/'.$mods.'.core.js',
+					'template'	=> 'core.js.tpl',
+				),
 		);
-		
 
-		$this->assign('mod', 	$mod);
-		$this->assign('mods', 	$mods);
-		$this->assign('table', 	$table);
-		$this->assign('fields', $fields);
-		$this->assign('index_field', $index_field);
-
+		$this->assign('mod', 			$mod);
+		$this->assign('mods', 			$mods);
+		$this->assign('table', 			$table);
+		$this->assign('fields', 		$fields);
+		$this->assign('index_field', 	$index_field);
 
 		foreach($files as $k => $file){
 			$path = get_file_path($file['path']);
 			
-			if(is_null($path)) $path= preg_replace("/(\w+\.)+(php|html)$/", "", $file['path']);
+			if(is_null($path)) $path = preg_replace("/(\w+\.)+(php|html|js|css)$/", "", $file['path']);
 			
 			maketree($path);
 			
@@ -171,18 +165,6 @@ class WebAction extends Action {
 		$this->display('list.tpl');
 	}
 
-	#api-demo.	
-	function api(){
-		$ip 	= getIP();
-		$data 	= array(
-			'code'		=> 0 , 
-			'message'	=> '成功', 
-			'data' 		=> $ip,
-		);
-		echo json_encode($data);
-	}
-	
-	
 	function dologin(){
 
 		$username = $_POST['username'];
@@ -222,7 +204,6 @@ class WebAction extends Action {
 		$this->display('seajs.tpl');
 	}
 
-
 	#page
 	function page(){
 		$web_service = $this->service('web');
@@ -237,63 +218,17 @@ class WebAction extends Action {
 		$this->display('page.tpl');
 	}
 
-	function text(){
-		$web_service = $this->service('web');
-		$fields = $web_service->onem('ts_'.$table);
-		
-		echo json_encode($data);
-	}
-
-	#测接口
-	function test(){
-		$config = array(
-			'sites'	=> array(
-				array('title' => '李守岩', 		'url' => 'http://lishouyan.zhdapi.deving.zhisland.com/client'),
-			),
-			'apis' =>	array(
-				array('title' => '用户列表', 	'url' => '/feed/user_list.json?user_id=0&feed_type=1'),
-				array('title' => '发布',		'url' => '/feed/publish.json?content=2'),
-			),
-		);
-		$this->assign('config', $config);
-		$this->display('test.tpl');	
-	}
-
-	function zhim(){
-		$site = $_POST['site'];
-		$api 	= $_POST['api'];
-
-		$curl = curl_init();
-		$url = $site.$api;
-		curl_setopt($curl, CURLOPT_URL, $url);
-		curl_setopt($curl, CURLOPT_POSTFIELDS, array());
-		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); 
-		$res = curl_exec($curl);
-	}
-
 	#切库
 	function change_db(){
-		//$page = http('http://lishouyan.static.deving.zhisland.com/index.php?mod=web&act=api');
-		//$page = json_decode($page, true);
-		//$page = array_merge($page, array('code'=>'1', 's'=>'1'));
-		//console::log($page);
+		$web_mod = $this->model('web');
 		
-		$mod = $this->model('web');
-		
-		$db = $mod->m->db(config('mysql_server.zhtfeed'));
-		//$db = $mod->m->db(config('mysql_server.zhisland'));
-		//$db->table('user')->insert({'username'=>'admin', 'password'=>'stupid'});
-		
-		$res = $db->table('user')->select();
-		//show_tables();
-		//$data  = array_get_fields($res, 0);
-		var_dump($res);
+		$tables = $web_mod->query('select * from ts_user');
+	
+		$sql = $web_mod->get_last_sql();
+		//$tables = array_get_fields($tables, 0);
+		pre($sql);
 	}
 
-	function db(){
-		$mod = $this->model('web');
-	}
-		
 	#mc test
 	public function mc(){
 		$mc = new Memcache;
@@ -301,12 +236,6 @@ class WebAction extends Action {
 		$mc->set('test', 'value_001', 0, 3600);
 		$mc_res = $mc->get('test');
 		$mc->close();
-	}
-	
-	public function pq(){
-		phpQuery::newDocumentFile('http://www.baidu.com/');  
-		$com = pq('#u a')->attr('href');
-		var_dump($com);
 	}
 
 }

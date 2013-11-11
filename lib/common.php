@@ -5,6 +5,13 @@ function load($file){
 	require($file);
 }
 
+function loads($path){
+	$files = get_files($path);
+	foreach($files as $file){
+		if(file_exists($file)) load($file);	
+	}
+}
+
 #配置函数
 function config($name, $value = ''){
 	static $_config = array();
@@ -12,7 +19,6 @@ function config($name, $value = ''){
 		$_config = array_merge($_config, $name);
 		return $_config;
 	}else if(is_string($name)){
-	
 		$argc = func_num_args();
 		if($argc == 1){
 			$_tmp = $_config;
@@ -89,7 +95,7 @@ function get_post($key, $value){
 }
 
 #
-function http($url){
+function http($url, $method = CURLOPT_POSTFIELDS){
 
 		$options = array( 
 			CURLOPT_RETURNTRANSFER => true,         // return web page 
@@ -110,7 +116,7 @@ function http($url){
 
 	$curl = curl_init();
 	curl_setopt($curl, CURLOPT_URL, $url);
-	curl_setopt($curl, CURLOPT_POSTFIELDS, array());
+	curl_setopt($curl, $method, array());
 	curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); 
 	curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1); 
 
@@ -136,6 +142,12 @@ function parse_json($data){
 		$json = preg_replace("#\\\u([0-9a-f]{4})#ie", "iconv('UCS-2', 'UTF-8', pack('H4', '\\1'))", $json);
 		return $json;
 	}
+}
+
+function pre($code){
+	echo('<pre>');
+	var_dump($code);
+	echo('</pre>');
 }
 
 ?>

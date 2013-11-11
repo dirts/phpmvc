@@ -1,7 +1,7 @@
 <?php
 class Model {
 	
-	# 初始化一个数据库
+	# 初始化一个数据库,初始化model的时候就初始化一个mysql实例
 	function __construct(){
 		$this->m = M();
 	}
@@ -43,6 +43,7 @@ class Model {
 		$this->m->table($table);
 		return $this;
 	}
+	
 
 }
 

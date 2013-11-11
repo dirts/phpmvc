@@ -1,7 +1,6 @@
 <?php
 
 define('WWWROOT',  				__DIR__);
-define('ROOTDIR',  				__DIR__);
 define('CFG_LANG', 				'chinese');
 define('APPS', 					'apps/');
 define('MOD', 					'mod');
@@ -18,10 +17,9 @@ define('ACTION_PHP', 			'.action.php');
 define('SERVICE_PHP', 			'.service.php');
 define('MODEL_PHP', 			'.model.php');
 
-define('SMARTY_PATH', 			ROOTDIR.'/plugins/smarty/');
+define('SMARTY_PATH', 			ROOT.'/plugins/smarty/');
 
 define('DEFAULT_LANG', 			'cn');
-
 
 #配置服务器
 config(array(
@@ -33,6 +31,12 @@ config(array(
 			'database'	=> 'zhisland',
 		),
 		'zhtfeed'=>array(
+			'host'		=> '192.168.2.70',
+			'username'	=> 'zhisland',
+			'password'	=> 'zhisland',
+			'database'	=> 'zhtfeed',
+		),
+		'default'=>array(
 			'host'		=> '192.168.2.70',
 			'username'	=> 'zhisland',
 			'password'	=> 'zhisland',

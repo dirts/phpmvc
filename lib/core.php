@@ -48,13 +48,13 @@ class D {
 
 	#初始化mod
 	function load_app($file, $mod, $act){
-		include_once($file);
+		load($file);
 		$mod_class = $mod.'Action';
 		$modapp = new $mod_class();
 			
 		$this->load_lang();
 		$modapp->init_smarty();
-		$modapp->smarty->template_dir = ROOTDIR.DS.APPS.$mod.TEMPLATES;
+		$modapp->smarty->template_dir = ROOT.DS.APPS.$mod.TEMPLATES;
 			
 		if(method_exists($modapp, $act)){
 			$modapp->$act();
@@ -74,15 +74,15 @@ class D {
 		$lang_file = $this->get_lang_file($this->app[MOD], $lang);
 
 		if(file_exists($lang_file)){
-			include_once($lang_file);
+			load($lang_file);
 		}
 	}
 
 	#获取语言包
-	function get_lang_file($mod, $lang){
-		$file = ROOTDIR.DS.APPS.$mod.DS.'lang/'.$lang.DOT_PHP;
+	function get_lang_file($mod, $lang = DEFAULT_LANG){
+		$file = ROOT.DS.APPS.$mod.DS.'lang/'.$lang.DOT_PHP;
 		if(!file_exists($file)){
-			$file = ROOTDIR.DS.APPS.$mod.DS.'lang/'.DEFAULT_LANG.DOT_PHP;
+			$file = ROOT.DS.APPS.$mod.DS.'lang/'.$lang.DOT_PHP;
 		}
 		return $file;
 	}

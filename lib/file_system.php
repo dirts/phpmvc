@@ -1,9 +1,24 @@
 <?php
-
 #打开一个文件
 function open($file){
 	if(file_exists($file) && is_file($file)) return file($file);
 	else return null;
+}
+
+function get_files($dir) {
+	$files = array();
+	if (false != ($handle = opendir ( $dir ))) {
+		$i=0;
+		while ( false !== ($file = readdir ( $handle )) ) {
+			if ($file != "." && $file != ".."&&strpos($file,".")) {
+				$files[]= $dir.$file;
+			}
+			$i++;
+		}
+	}
+	//关闭句柄
+	closedir($handle);
+	return $files;
 }
 
 function read($file){

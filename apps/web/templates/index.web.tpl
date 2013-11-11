@@ -43,5 +43,5 @@
 	</div>
 </div>
 <include file="../Public/core.js" />
-<!--<script type="text/javascript" src="__PUBLIC__/static/{%$mods%}/js/core.js"></script>-->
+<script type="text/javascript" src="__STATIC__/admin/{%$mods%}/js/{%$mods%}.core.js"></script>
 <include file="../Public/foot.bootstrap" />

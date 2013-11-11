@@ -6,6 +6,8 @@ class MysqlClass{
 	private $sql;
 
 	function __construct(){
+		//初始化建立链接
+		$this->connect(config('mysql_server.default'));
 	}
 
 	#包裹转义字符，防止注入 \x00、 \n、 \r、 \、 '、 "、 \x1a、
@@ -23,22 +25,23 @@ class MysqlClass{
 		}
 	}
 
-
 	private function _qeury($sql){
 		mysql_query($sql, $this->conn);	
 	}
 
 	#执行一段sql语句, 慎用!
-	public function query($sql){
+	public function query($sql, $fetch = 'row'){
 		if(!is_resource($this->conn)) return false;
-		
 		$results = array();
+
+		$sql = mysql_real_escape_string($sql);
 		$this->sql = $sql;
 		
 		$query_result = mysql_query($sql, $this->conn);
 		if(is_bool($query_result)) return $query_result;
-				
-		while($res = mysql_fetch_row($query_result))
+
+		/*mysql_fetch_row[offset], mysql_fetch_assoc[key value], mysql_fetch_array[both]*/
+		while($res = mysql_fetch_assoc($query_result))
 			$results[] = $res;
 		$count = count($results);
 		
@@ -51,6 +54,7 @@ class MysqlClass{
 	#查询
 	public function select(){
 		if(!is_resource($this->conn)) return false;
+		
 		$sql = printf('select * from %s', $this->table);
 		if(isset($this->condition)) $sql .= ' where '.$this->condition;
 		
@@ -90,7 +94,7 @@ class MysqlClass{
 	}
 
 	public function update($info){
-		if($this->conn){
+		if(!is_resource($conn)){
 			$sql = 'update '.$this->table.' set ';
 			foreach($info as $key => $val){
 				$info[$key] = $key.'=\''.$val.'\'';
@@ -109,7 +113,7 @@ class MysqlClass{
 	
 	#删除语句
 	public function delele($table){
-		if($this->conn){
+		if(!is_resource($conn)){
 			$sql = "delete from ".$this->table ."where". $this->condition;
 			$query = mysql_query($sql, $this->conn);
 			return $query;
@@ -118,11 +122,9 @@ class MysqlClass{
 
 	#获取数据库的表
 	public function show_tables(){
-		if($this->conn){
-			$sql = 'show tables';
-			$query_result = $this->query('show tables');
-			return $query_result;
-		}
+		$sql = 'show tables';
+		$query_result = $this->query($sql);
+		return $query_result;
 	}
 
 	#连库操作
@@ -133,8 +135,7 @@ class MysqlClass{
 			mysql_select_db($db['database'], $conn);
 			mysql_query($setnames, $conn);
 		}
-		$this->conn =$conn;
-		return $this->conn;
+		return $this->conn = $conn;
 	}
 
 	#切库函数
