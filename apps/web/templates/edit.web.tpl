@@ -1,9 +1,9 @@
 <include file="../Public/header.bootstrap" />
+<ul class="breadcrumb anti-radius i-shadow">
+	<li><a href="#">首页</a> <span class="divider">/</span></li>
+	<li class="active">编辑</li>
+</ul>
 <div class="container-fluid">
-	<ul class="breadcrumb">
-		<li><a href="#">首页</a> <span class="divider">/</span></li>
-		<li class="active">编辑</li>
-	</ul>
 	<if condition="$id">
 		<form action="{:U('admin/{%$mod%}/update', array('{%$index_field%}' => $id ))}" method="post">
 	<else />

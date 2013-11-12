@@ -23,11 +23,20 @@ class Action {
 		$this->smarty->display($tpl);
 	}
 
+	#调取service方法
 	function service($app){
 		include_once(ROOTDIR.DS.APPS.$app.DS.$app.SERVICE_PHP);
 		$Service_Class = $app.'Service';
 		$service = new $Service_Class();
 		return $service;
+	}
+	
+	#调取model方法
+	function model($app){
+		include_once(ROOTDIR.DS.APPS.$app.DS.$app.MODEL_PHP);
+		$Model_Class = $app.'Model';
+		$model = new $Model_Class();
+		return $model;
 	}
 
 }

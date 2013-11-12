@@ -1,22 +1,63 @@
 <?php
 class WebAction extends Action {
-	function filesystem(){
+	
+	function pinyin(){
+		$file  = file('/home/lishouyan/wwwroot/static.zhisland.com/alpha/apps/web/pinyin.txt');
+		$tmp = array();
+		if($file){
+			foreach($file as $line){
+				$arr = explode(',', $line);
+				foreach($arr as $k => $v){
+					$arr[$k] = trim($v);
+				}
+				$tmp[] = $arr;
+			}
+		}
+		
+
+		$service = $this->service('web');
+		foreach($tmp as $a){
+			$service->pin($a);
+		}
+		
+	}
+
+	function is_pinyin($str){
+		return preg_match('/^\w+/i', $str);
+	}
+
+	function city(){
+		$service = $this->service('web');
+		$citys = $service->get_citys();
+		$service->city_pinyins($citys);
+		
+	}
+	
+	function city_fixed(){
+		$service = $this->service('web');
+		$citys = $service->get_citys();
+		$service->city_fixed($citys);
+		
+	}
+
+	
+	function fs(){
 		#选择环境
-		$dev 	= '/home/lishouyan/wwwroot/www.zhisland.com/alpha';
+		$dev 	= '/home/yujin/zht_admin';
 		#模块名字
-		$mod 	= 'Wtest';
+		$mod 	= 'User';
 		#表名字
-		$table 	= 'weibo'; 
+		$table 	= 'user_stat'; 
 		
 		$mods 	= strtolower($mod);
 		
 		#=========
-		$file = WWWROOT.DS.APPS.'web'.DS.'wt.s';
+		//$file = WWWROOT.DS.APPS.'web'.DS.'wt.s';
 		
-		$file_array = open($file);
+		//$file_array = open($file);
 
-		$file_name = get_file_name($file);
-		$file_path = get_file_path($file);
+		//$file_name = get_file_name($file);
+		//$file_path = get_file_path($file);
 
 
 		$web_service = $this->service('web');
@@ -40,22 +81,29 @@ class WebAction extends Action {
 				$fields[$key]['html'] = '<input type="text" name="'.$field['Field'].'" value="{$data[\''.$field['Field'].'\']}"/>';
 			};
 		}
-		
-		#创建目录:home/lishouyan/www/
-		maketree($dev.'/apps/admin/Tpl/default/'.$mod);	
-		
-		maketree($dev.'/apps/'.$mods.'/Lib/Action');	
-		maketree($dev.'/apps/'.$mods.'/Lib/Service');	
-		maketree($dev.'/apps/'.$mods.'/Lib/Model');	
 
-		file_create($dev.'/apps/admin/Tpl/default/'.$mod.'/index.html');
-		file_create($dev.'/apps/admin/Tpl/default/'.$mod.'/edit.html');
-		
-		file_create($dev.'/apps/admin/Lib/Action/'.$mod.'Action.class.php');
-		
-		file_create($dev.'/apps/'.$mods.'/Lib/Service/'.$mod.'Service.class.php');	
-		file_create($dev.'/apps/'.$mods.'/Lib/Model/'.$mod.'Model.class.php');	
-		
+		$files = array(
+			'index.html' 		=> array(
+					'path'		=> $dev.'/apps/admin/Tpl/default/'.$mod.'/index.html',
+					'template'	=> 'index.web.tpl',
+				),
+			'edit.html'			=> array(
+					'path'		=> $dev.'/apps/admin/Tpl/default/'.$mod.'/edit.html',
+					'template'	=> 'edit.web.tpl',
+				),
+			'action.class.php'	=> array(
+					'path'		=> $dev.'/apps/admin/Lib/Action/'.$mod.'Action.class.php',
+					'template'	=> 'action.tpl',
+				),
+			'Service.class.php'	=> array(
+					'path'		=> $dev.'/apps/'.$mods.'/Lib/Service/'.$mod.'Service.class.php',
+					'template'	=> 'service.tpl',
+				),
+			'Model.class.php'	=> array(
+					'path'		=> $dev.'/apps/'.$mods.'/Lib/Model/'.$mod.'Model.class.php',
+					'template'	=> 'model.tpl',
+				),
+		);
 		
 
 		$this->assign('mod', 	$mod);
@@ -63,21 +111,29 @@ class WebAction extends Action {
 		$this->assign('table', 	$table);
 		$this->assign('fields', $fields);
 		$this->assign('index_field', $index_field);
-		
-		$index_html 	= $this->fetch('index.web.tpl');
-		$edit_html 		= $this->fetch('edit.web.tpl');
-		$admin_action 	= $this->fetch('action.tpl');
-		$mod_service 	= $this->fetch('service.tpl');
-		$mod_model 		= $this->fetch('model.tpl');
-		
-		file_write($dev.'/apps/admin/Tpl/default/'.$mod.'/index.html', $index_html);
-		file_write($dev.'/apps/admin/Tpl/default/'.$mod.'/edit.html', $edit_html);
-		file_write($dev.'/apps/admin/Lib/Action/'.$mod.'Action.class.php', '<?php'.PHP_EOL.$admin_action);
-		file_write($dev.'/apps/'.$mods.'/Lib/Service/'.$mod.'Service.class.php', '<?php'.PHP_EOL.$mod_service);
-		file_write($dev.'/apps/'.$mods.'/Lib/Model/'.$mod.'Model.class.php', '<?php'.PHP_EOL.$mod_model);
 
+
+		foreach($files as $k => $file){
+			$path = get_file_path($file['path']);
+			
+			if(is_null($path)) $path= preg_replace("/(\w+\.)+(php|html)$/", "", $file['path']);
+			
+			var_dump($path);
+			maketree($path);
+			
+			file_create($file['path']);
+			$content = $this->fetch($file['template']);
+			
+			$ex = get_extension($file['path']);
+			if( $ex == 'php' ) file_write($file['path'], '<?php' . PHP_EOL . $content);
+			else file_write($file['path'], $content);
+		}
+	
+		$this->assign('files', $files);
+		$this->display('fs.tpl');
 		return;
 	}
+
 
 	function bootstrap(){
 		$res = preg_match('/ts/', 'tsssts');
@@ -179,6 +235,49 @@ class WebAction extends Action {
 			
 		$this->assign('tables', $tables);
 		$this->display('page.tpl');
+	}
+
+	function text(){
+		$web_service = $this->service('web');
+		$fields = $web_service->onem('ts_'.$table);
+		
+		echo json_encode($data);
+	}
+
+	#测接口
+	function test(){
+		$config = array(
+			'sites'	=> array(
+				array('title' => '李守岩', 		'url' => 'http://lishouyan.zhdapi.deving.zhisland.com/client'),
+			),
+			'apis' =>	array(
+				array('title' => '用户列表', 	'url' => '/feed/user_list.json?user_id=0&feed_type=1'),
+				array('title' => '发布',		'url' => '/feed/publish.json?content=2'),
+			),
+		);
+		$this->assign('config', $config);
+		$this->display('test.tpl');	
+	}
+
+	function zhim(){
+		$site = $_POST['site'];
+		$api 	= $_POST['api'];
+
+		$curl = curl_init();
+		$url = $site.$api;
+		curl_setopt($curl, CURLOPT_URL, $url);
+		curl_setopt($curl, CURLOPT_POSTFIELDS, array());
+		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); 
+		$res = curl_exec($curl);
+	}
+
+	#切库
+	function change_db(){
+		$mod = $this->model('web');
+
+		$db = $mod->m->switch_db(config('mysql_server.zhisland'));
+		$res = $db->get_table();
+		
 	}
 
 }

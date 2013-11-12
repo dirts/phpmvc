@@ -1,10 +1,9 @@
 <include file="../Public/header.bootstrap" />
+<ul class="breadcrumb anti-radius i-shadow">
+	<li><a href="#">首页</a> <span class="divider">/</span></li>
+	<li class="active">列表</li>
+</ul>
 <div class="container-fluid">
-	
-	<ul class="breadcrumb">
-		<li><a href="#">首页</a> <span class="divider">/</span></li>
-		<li class="active">列表</li>
-	</ul>
 	<div class="fluid">
 		<div class="nav clearfix">
 			<form class="float-left clearall" action="{:U('admin/{%$mod%}/index')}" method="post">
@@ -34,7 +33,7 @@
 			{%/foreach%}
 			<td>
 				<a href="{:U('admin/{%$mod%}/edit', array( '{%$index_field%}' => $item['{%$index_field%}'] ))}"><i class="icon-edit"></i>编辑</a>
-				<a href="{:U('admin/{%$mod%}/delete', array( '{%$index_field%}' => $item['{%$index_field%}'] ))}" onclick="return false;"><i class="remove"></i>删除</a>
+				<a href="{:U('admin/{%$mod%}/delete', array( '{%$index_field%}' => $item['{%$index_field%}'] ))}" action-type="action-del" onclick="return false;"><i class="remove"></i>删除</a>
 			</td>
 		</tr>
 		</volist>
@@ -44,4 +43,5 @@
 	</div>
 </div>
 <include file="../Public/core.js" />
+<!--<script type="text/javascript" src="__PUBLIC__/static/{%$mods%}/js/core.js"></script>-->
 <include file="../Public/foot.bootstrap" />

@@ -7,15 +7,14 @@ class {%$mod%}Action extends AdministratorAction {
 		if(!empty($_POST)){
 			$keys = array_keys($req = $_POST);
 			$key = $keys[0];
-		}else if(count($_GET) > 1){
+		}else if(count($_GET) > 2 ){
 			$keys = array_keys($req = $_GET);
 			$key = $keys[1];
 		}
 
 		if(!empty($keys)) $map[$key] = array('like', '%'. $req[$key] .'%');
 		else $map = '';
-	
-		var_dump($map);
+		
 		$data = app_service('{%$mod%}', '{%$mods%}')->get_list($map, '*', 'uid DESC');
 		$this->assign('data', $data);
 

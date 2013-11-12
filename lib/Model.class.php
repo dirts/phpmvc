@@ -6,6 +6,10 @@ class Model {
 		$this->m = M();
 	}
 
+	function connect($db){
+		return $this->m->connect($db);
+	}
+
 	function query($sql){
 		return $this->m->query($sql);
 	}
