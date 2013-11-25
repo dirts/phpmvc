@@ -1,4 +1,5 @@
 <?php
+//error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
 class WebAction extends Action {
 	
 	function pinyin(){
@@ -42,12 +43,13 @@ class WebAction extends Action {
 
 	
 	function fs(){
+		return;
 		#选择环境
-		$dev 	= '/home/yujin/zht_admin';
+		$dev 	= '/home/yujin/dev-yujins';
 		#模块名字
-		$mod 	= 'User';
+		$mod 	= 'Bus';
 		#表名字
-		$table 	= 'user_stat'; 
+		$table 	= 'user_bus'; 
 		
 		$mods 	= strtolower($mod);
 		
@@ -118,7 +120,6 @@ class WebAction extends Action {
 			
 			if(is_null($path)) $path= preg_replace("/(\w+\.)+(php|html)$/", "", $file['path']);
 			
-			var_dump($path);
 			maketree($path);
 			
 			file_create($file['path']);
@@ -273,12 +274,14 @@ class WebAction extends Action {
 
 	#切库
 	function change_db(){
+		$page = http('http://lishouyan.static.deving.zhisland.com/index.php?mod=web&act=api');
+		$page = json_decode($page, true);
+		$page = array_merge($page, array('code'=>'1', 's'=>'1'));
+		console::log($page);
 		$mod = $this->model('web');
 
 		$db = $mod->m->switch_db(config('mysql_server.zhisland'));
 		$res = $db->get_table();
-		
 	}
-
 }
 ?>

@@ -42,4 +42,3 @@ config(array(
 ));
 
 $sql = config('mysql_server.zhisland');
-var_dump($sql);
