@@ -1,0 +1,53 @@
+#!/bin/sh   
+conf=/usr/local/etc/nginx/nginx.conf
+function_start_nginx()   
+{   
+    printf "Starting NGINX...\n"  
+    /usr/local/nginx/sbin/nginx -c /usr/local/etc/nginx/nginx.conf 2>&1 > /dev/null &   
+}   
+  
+function_stop_nginx()   
+{   
+    printf "Stoping NGINX...\n"  
+    kill  `cat /usr/local/etc/run/nginx.pid`   
+}   
+  
+function_restart_nginx()   
+{   
+    printf "Restarting NGINX...\n"  
+    function_stop_nginx   
+    sleep 5   
+    function_start_nginx   
+}   
+  
+function_kill_nginx()   
+{   
+    kill -9 `cat /usr/local/etc/run/nginx.pid`   
+    kill -9 `cat /usr/local/etc/run/nginx.pid`   
+}   
+  
+function_reload_nginx()   
+{
+    /usr/local/nginx/sbin/nginx -t -c /usr/local/etc/nginx/nginx.conf  
+    kill -HUP `cat /usr/local/etc/run/nginx.pid`
+}
+function_test_nginx()
+{
+    /usr/local/nginx/sbin/nginx -t -c /usr/local/etc/nginx/nginx.conf
+}
+
+if [ "$1" = "start" ]; then   
+    function_start_nginx   
+elif [ "$1" = "stop" ]; then   
+    function_stop_nginx   
+elif [ "$1" = "restart" ]; then   
+	function_restart_nginx   
+elif [ "$1" = "kill" ]; then   
+	function_kill_nginx  
+elif [ "$1" = "reload" ]; then
+	function_reload_nginx
+elif [ "$1" = "test" ]; then
+	`function_test_nginx
+else  
+    printf "Usage: /usr/local/etc/rc.d/nginx {start|stop|restart|kill|reload|test}\n"  
+fi 
