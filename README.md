@@ -1,4 +1,4 @@
-a PHP-MVC : Dirt
+Dirt@PHP
 ======
 
 ## 模仿TP框架和minisystem框架，整体分为:
