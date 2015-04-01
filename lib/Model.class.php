@@ -1,7 +1,6 @@
 <?php
 namespace Dirt\Lib;
 
-
 class Model {
 
     protected $sql = '';
@@ -18,7 +17,7 @@ class Model {
             throw new \Virus\Frame\VException('wraing : ImTalbeBase Class init false!', 25001);
         }
         
-        $this->conn = DBImHelper::getConn();
+        $this->conn = DB::get_conn();
     }
 
     public function  get_real_sql($sql, $param) {

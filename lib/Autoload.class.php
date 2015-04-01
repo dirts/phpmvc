@@ -14,10 +14,10 @@ class Autoload {
     }
 
     public function get_path($class) {
-        $arr = explode("\\", strtolower($class));
+        $arr = explode("\\", $class);
         array_shift($arr);
         $class_name = array_pop($arr);
-        $path = "./". join("/", $arr) . '/' . ucfirst($class_name) . ".class.php";
+        $path = "./". strtolower(join("/", $arr)) . '/' . ucfirst($class_name) . ".class.php";
         return $path;
     }
 
