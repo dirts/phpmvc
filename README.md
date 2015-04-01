@@ -11,6 +11,22 @@ a PHP-MVC : Dirt
 
 ## index.php?mod=mod&act=act 为具体模块的地址
 
+    <?php
+    namespace Dirt\Action\Web;
+    
+    class Index extends \Dirt\Lib\Action {
+    
+        public function run() {
+            $this->smarty();
+            //接受参数
+            $name = $this->get('name', '咋办项目组smarty:hello world!');
+            $this->assign('name', '咋办软件项目租');
+            $this->display('index.tpl');
+        }
+    }
+    
+    ?>
+
 ## Action.class.php 目前拥有方法(调用 smarty 方法):
 
 	$this->assign('data', $data);
