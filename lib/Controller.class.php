@@ -42,8 +42,8 @@ class Controller {
 
 
     public function dispatch() {
-        $arr = array('Dirt','Apps');
-        $arr[] = ucfirst($this->get_request('app', 'web'));
+        $arr = array('Dirt','Action');
+        $arr[] = ucfirst($this->get_request('mod', 'web'));
         $arr[] = ucfirst($this->get_request('act', 'index'));
         $namespace = join("\\", $arr);
         $instance = new $namespace();
