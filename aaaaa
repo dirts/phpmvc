@@ -1,0 +1,88 @@
+table_config=\
+{
+    "input_tables": [
+        "tbl_pat_patients",
+        "tbl_pat_cross_indexes",
+        "tbl_alg_patient_allergies"
+    ],
+    "sql": {
+        "filter_table0": {
+            "sql": "select tbl_pat_patients.hospital_key as medical_institution_code ,tbl_pat_patients.patient_id as basic_info_1_patient_sn ,tbl_pat_patients.patient_name as basic_info_1_patient_name ,tbl_pat_cross_indexes.inpatient_record_no as basic_info_1_medical_record_no ,tbl_pat_cross_indexes.inpatient_no as basic_info_1_inpatient_no ,tbl_pat_cross_indexes.outpatient_no as basic_info_1_outpatient_no ,tbl_pat_patients.cdt_patient_gender as basic_info_1_gender_name ,tbl_pat_patients.birth_date as basic_info_1_birth_date ,tbl_pat_patients.cdt_marital_status as basic_info_1_marriage_status_name ,tbl_pat_patients.cdt_ethnic_group as basic_info_1_nation_name ,tbl_pat_patients.birth_place_province as basic_info_1_birth_place_province ,tbl_pat_patients.birth_place_city as basic_info_1_birth_place_city ,tbl_pat_patients.birth_place_county as basic_info_1_birth_place_region ,tbl_pat_patients.cdt_nationality as basic_info_1_nationality_name ,tbl_pat_patients.native_place_province as basic_info_1_ancestral_home_province ,tbl_pat_patients.native_place_city as basic_info_1_ancestral_home_region ,tbl_pat_patients.domicile_place_province as basic_info_1_domicile_place_province ,tbl_pat_patients.domicile_place_city as basic_info_1_domicile_place_city ,tbl_pat_patients.domicile_place_county as basic_info_1_domicile_place_county ,tbl_pat_patients.domicile_place_postcode as basic_info_1_domicile_place_zip_code ,tbl_pat_patients.cdt_occupation as basic_info_1_occupation_name ,tbl_pat_patients.work_place as basic_info_1_work_address ,tbl_pat_patients.work_postcode as basic_info_1_work_zip_code ,tbl_pat_patients.work_telephone as basic_info_1_work_telephone ,tbl_pat_patients.home_telephone as basic_info_1_telephone ,'1' as certificates_1_credential_type ,'居民身份证' as certificates_1_credential_type_name ,tbl_pat_patients.id_card_no as certificates_1_credential_no ,tbl_pat_patients.home_address_province as home_address_info_1_address_province ,tbl_pat_patients.home_address_city as home_address_info_1_address_city ,tbl_pat_patients.home_address_county as home_address_info_1_district_name ,tbl_pat_patients.home_address_postcode as home_address_info_1_zip_code ,tbl_pat_patients.contact_relationship as contact_1_relationship_name ,tbl_pat_patients.contact_name as contact_1_contact_name ,tbl_pat_patients.contact_telephone as contact_1_contact_telephone ,tbl_pat_patients.contact_address as contact_1_contact_address ,tbl_pat_cross_indexes.hospital_card_no as medical_insurance_1_medical_card_no ,tbl_pat_cross_indexes.mrn as medical_insurance_1_insurance_card_no ,tbl_alg_patient_allergies.allergy_id as allergic_history_1_allergic_id ,tbl_alg_patient_allergies.cdt_allergy_symptoms as allergic_history_1_allergic_symptom ,tbl_alg_patient_allergies.cdt_allergen as allergic_history_1_allergic_source ,tbl_alg_patient_allergies.cdt_severity as allergic_history_1_seriousness_name ,tbl_alg_patient_allergies.comments as allergic_history_1_comment ,tbl_alg_patient_allergies.create_allergy_user as allergic_history_1_recorder_name ,tbl_alg_patient_allergies.create_allergy_datetime as allergic_history_1_date_of_note  from tbl_pat_patients left outer join tbl_pat_cross_indexes on ( tbl_pat_patients.patient_id = tbl_pat_cross_indexes.patient_id ) left outer join tbl_alg_patient_allergies on ( tbl_pat_patients.patient_id = tbl_alg_patient_allergies.patient_id ) "
+        },
+        "group_table0": {
+            "sql": "select medical_institution_code,basic_info_1_patient_sn,basic_info_1_patient_name,basic_info_1_medical_record_no,basic_info_1_inpatient_no,basic_info_1_outpatient_no,basic_info_1_gender_name,basic_info_1_birth_date,basic_info_1_marriage_status_name,basic_info_1_nation_name,basic_info_1_birth_place_province,basic_info_1_birth_place_city,basic_info_1_birth_place_region,basic_info_1_nationality_name,basic_info_1_ancestral_home_province,basic_info_1_ancestral_home_region,basic_info_1_domicile_place_province,basic_info_1_domicile_place_city,basic_info_1_domicile_place_county,basic_info_1_domicile_place_zip_code,basic_info_1_occupation_name,basic_info_1_work_address,basic_info_1_work_zip_code,basic_info_1_work_telephone,basic_info_1_telephone,certificates_1_credential_type,certificates_1_credential_type_name,certificates_1_credential_no,home_address_info_1_address_province,home_address_info_1_address_city,home_address_info_1_district_name,home_address_info_1_zip_code,contact_1_relationship_name,contact_1_contact_name,contact_1_contact_telephone,contact_1_contact_address,medical_insurance_1_medical_card_no,medical_insurance_1_insurance_card_no, yd_collect_set( named_struct('allergic_id', allergic_history_1_allergic_id,'allergic_symptom', allergic_history_1_allergic_symptom,'allergic_source', allergic_history_1_allergic_source,'seriousness_name', allergic_history_1_seriousness_name,'comment', allergic_history_1_comment,'recorder_name', allergic_history_1_recorder_name,'date_of_note', allergic_history_1_date_of_note) ) as allergic_history from filter_table0 group by medical_institution_code,basic_info_1_patient_sn,basic_info_1_patient_name,basic_info_1_medical_record_no,basic_info_1_inpatient_no,basic_info_1_outpatient_no,basic_info_1_gender_name,basic_info_1_birth_date,basic_info_1_marriage_status_name,basic_info_1_nation_name,basic_info_1_birth_place_province,basic_info_1_birth_place_city,basic_info_1_birth_place_region,basic_info_1_nationality_name,basic_info_1_ancestral_home_province,basic_info_1_ancestral_home_region,basic_info_1_domicile_place_province,basic_info_1_domicile_place_city,basic_info_1_domicile_place_county,basic_info_1_domicile_place_zip_code,basic_info_1_occupation_name,basic_info_1_work_address,basic_info_1_work_zip_code,basic_info_1_work_telephone,basic_info_1_telephone,certificates_1_credential_type,certificates_1_credential_type_name,certificates_1_credential_no,home_address_info_1_address_province,home_address_info_1_address_city,home_address_info_1_district_name,home_address_info_1_zip_code,contact_1_relationship_name,contact_1_contact_name,contact_1_contact_telephone,contact_1_contact_address,medical_insurance_1_medical_card_no,medical_insurance_1_insurance_card_no",
+            "dependency": [
+                "filter_table0"
+            ]
+        },
+        "patient_basic_information": {
+            "sql": "select medical_institution_code,allergic_history,named_struct('patient_sn', basic_info_1_patient_sn,'patient_name', basic_info_1_patient_name,'medical_record_no', basic_info_1_medical_record_no,'inpatient_no', basic_info_1_inpatient_no,'outpatient_no', basic_info_1_outpatient_no,'gender_name', basic_info_1_gender_name,'birth_date', basic_info_1_birth_date,'marriage_status_name', basic_info_1_marriage_status_name,'nation_name', basic_info_1_nation_name,'birth_place_province', basic_info_1_birth_place_province,'birth_place_city', basic_info_1_birth_place_city,'birth_place_region', basic_info_1_birth_place_region,'nationality_name', basic_info_1_nationality_name,'ancestral_home_province', basic_info_1_ancestral_home_province,'ancestral_home_region', basic_info_1_ancestral_home_region,'domicile_place_province', basic_info_1_domicile_place_province,'domicile_place_city', basic_info_1_domicile_place_city,'domicile_place_county', basic_info_1_domicile_place_county,'domicile_place_zip_code', basic_info_1_domicile_place_zip_code,'occupation_name', basic_info_1_occupation_name,'work_address', basic_info_1_work_address,'work_zip_code', basic_info_1_work_zip_code,'work_telephone', basic_info_1_work_telephone,'telephone', basic_info_1_telephone) as basic_info,named_struct('credential_type', certificates_1_credential_type,'credential_type_name', certificates_1_credential_type_name,'credential_no', certificates_1_credential_no) as certificates,named_struct('address_province', home_address_info_1_address_province,'address_city', home_address_info_1_address_city,'district_name', home_address_info_1_district_name,'zip_code', home_address_info_1_zip_code) as home_address_info,named_struct('relationship_name', contact_1_relationship_name,'contact_name', contact_1_contact_name,'contact_telephone', contact_1_contact_telephone,'contact_address', contact_1_contact_address) as contact,named_struct('medical_card_no', medical_insurance_1_medical_card_no,'insurance_card_no', medical_insurance_1_insurance_card_no) as medical_insurance from group_table0",
+            "dependency": [
+                "group_table0"
+            ],
+            "mainSql": 1
+        }
+    },
+    "format": {
+        "file_name": "patient_basic_information",
+        "medical_institution_code": "float",
+        "basic_info": {
+            "patient_sn": "string",
+            "patient_name": "string",
+            "medical_record_no": "string",
+            "inpatient_no": "string",
+            "outpatient_no": "string",
+            "gender_name": "string",
+            "birth_date": "string",
+            "marriage_status_name": "string",
+            "nation_name": "string",
+            "birth_place_province": "string",
+            "birth_place_city": "string",
+            "birth_place_region": "string",
+            "nationality_name": "string",
+            "ancestral_home_province": "string",
+            "ancestral_home_region": "string",
+            "domicile_place_province": "string",
+            "domicile_place_city": "string",
+            "domicile_place_county": "string",
+            "domicile_place_zip_code": "string",
+            "occupation_name": "string",
+            "work_address": "string",
+            "work_zip_code": "float",
+            "work_telephone": "string",
+            "telephone": "string"
+        },
+        "certificates": {
+            "credential_type": "string",
+            "credential_type_name": "string",
+            "credential_no": "string"
+        },
+        "home_address_info": {
+            "address_province": "string",
+            "address_city": "string",
+            "district_name": "string",
+            "zip_code": "float"
+        },
+        "contact": {
+            "relationship_name": "string",
+            "contact_name": "string",
+            "contact_telephone": "string",
+            "contact_address": "string"
+        },
+        "medical_insurance": {
+            "medical_card_no": "string",
+            "insurance_card_no": "string"
+        },
+        "allergic_history": [
+            {
+                "allergic_id": "string",
+                "allergic_symptom": "string",
+                "allergic_source": "string",
+                "seriousness_name": "string",
+                "comment": "string",
+                "recorder_name": "string",
+                "date_of_note": "string"
+            }
+        ]
+    }
+}
